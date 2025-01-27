@@ -10,10 +10,7 @@ import authScreenAtom from "../atoms/authAtom";
 import { BsFillChatQuoteFill } from "react-icons/bs";
 import { MdOutlineSettings } from "react-icons/md";
 import { SearchIcon } from "@chakra-ui/icons";
-<<<<<<< HEAD
 
-=======
->>>>>>> 38fc99ce27de15d0a601aff9177c03e976115197
 
 const Header = () => {
 	const { colorMode, toggleColorMode } = useColorMode();
