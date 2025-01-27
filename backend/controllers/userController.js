@@ -239,6 +239,29 @@ const freezeAccount = async (req, res) => {
 	}
 };
 
+
+const searchUser = async (req, res) => {
+	const { q } = req.query;
+  
+	if (!q) {
+	  return res.status(400).json({ error: "Search query is required" });
+	}
+  
+	try {
+	  const users = await User.find({
+		$or: [
+		  { username: { $regex: q, $options: "i" } }, // Case-insensitive match for username
+		  { name: { $regex: q, $options: "i" } }, // Case-insensitive match for name
+		],
+	  }).select("_id username profilePic name");
+  
+	  res.json(users);
+	} catch (error) {
+	  console.error(error);
+	  res.status(500).json({ error: "Something went wrong" });
+	}
+  };
+
 export {
 	signupUser,
 	loginUser,
@@ -248,6 +271,7 @@ export {
 	getUserProfile,
 	getSuggestedUsers,
 	freezeAccount,
+	searchUser,
 };
 
 
